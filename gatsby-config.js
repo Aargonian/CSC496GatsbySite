@@ -1,4 +1,5 @@
 module.exports = {
+    pathPrefix: '/CSC496GatsbySite',
     siteMetadata: {
       title: `My First Gatsby Site`,
       siteUrl: `https://www.yourdomain.tld`,
