@@ -18,7 +18,14 @@ const getPokemonNames = async (limit) =>
 const getPokemonData = names =>
   Promise.all(
     names.map(async name => {
-      const { data: pokemon } = await get(`/pokemon/${name}`)
+      const { data: pokemon_temp } = await get(`/pokemon/${name}`)
+      pokemon = {
+	  name: pokemon_temp.name,
+	  sprites: pokemon_temp.sprites,
+	  id: pokemon_temp.id,
+	  stats: pokemon_temp.stats,
+	  types: pokemon_temp.types,
+      }
       return { ...pokemon }
     })
   )
