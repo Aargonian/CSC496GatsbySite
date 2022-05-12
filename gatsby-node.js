@@ -36,9 +36,21 @@ exports.createPages = async ({ actions: { createPage } }) => {
     })
   }
 
+  // Create the main pokemon page
   createPage({
     path: `/pokemon`,
     component: require.resolve("./src/templates/all-pokemon.js"),
     context: { allPokemon },
+  })
+
+  // Create the individual pages
+  allPokemon.forEach((pokemon) => {
+    createPage(
+      {
+        path: `/pokemon/${pokemon.name}`,
+        component: require.resolve("./src/templates/pokemon.js"),
+        context: { pokemon },
+      }
+    )
   })
 }
