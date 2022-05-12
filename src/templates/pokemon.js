@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "gatsby";
 import Pie from "../components/pie";
 import "./pokemon.css";
 
@@ -7,6 +8,11 @@ export default function Pokemon({ pageContext: { pokemon } }) {
     pokemon.stats.forEach((stat) => {
         stat_total += stat.base_stat;
     });
+
+    pokemon.name =
+        pokemon.name.charAt(0).toUpperCase() + pokemon.name.substr(1);
+    if (pokemon.previous == null) pokemon.previous = pokemon.name;
+    if (pokemon.next == null) pokemon.next = pokemon.name;
 
     const hpSlice = pokemon.stats[0].base_stat / stat_total;
     const attackSlice = pokemon.stats[1].base_stat / stat_total;
@@ -24,6 +30,15 @@ export default function Pokemon({ pageContext: { pokemon } }) {
         { label: "Speed", value: speedSlice },
     ];
 
+    const type_string = (types) => {
+        let type1 = types[0].type.name;
+        let type2 = types[1] == null ? type1 : types[1].type.name;
+        type1 = type1.charAt(0).toUpperCase() + type1.substr(1);
+        type2 = type2.charAt(0).toUpperCase() + type2.substr(1);
+
+        return type1 + "/" + type2;
+    };
+
     const stat_name = (stat) => {
         const words = stat.stat.name.replace("-", " ").split(" ");
         for (let i = 0; i < words.length; i++) {
@@ -33,8 +48,27 @@ export default function Pokemon({ pageContext: { pokemon } }) {
     };
 
     return (
-        <div>
-            <h1 class="heading">{pokemon.name}</h1>
+        <div class="page_container">
+            <header class="header">
+                <h1 class="heading">{pokemon.name}</h1>
+                <nav class="navbar">
+                    <p class="prevNavLink">
+                        <Link to={`/pokemon/${pokemon.previous}`}>
+                            {pokemon.previous}
+                        </Link>
+                    </p>
+                    <p class="returnNavLink">
+                        <Link to={`/pokemon`}>
+                            Return to Pokedex
+                        </Link>
+                    </p>
+                    <p class="nextNavLink">
+                        <Link to={`/pokemon/${pokemon.next}`}>
+                            {pokemon.next}
+                        </Link>
+                    </p>
+                </nav>
+            </header>
             <div class="pokemon_container">
                 <div class="pokemon_flex">
                     <img
@@ -73,6 +107,16 @@ export default function Pokemon({ pageContext: { pokemon } }) {
                                 ))}
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="misc_container">
+                    <div class="misc_item">
+                        <strong>Pokedex Number: </strong>
+                        {"#" + String(pokemon.id).padStart(3, "0")}
+                    </div>
+                    <div class="misc_item">
+                        <strong>Type: </strong>
+                        {type_string(pokemon.types)}
                     </div>
                 </div>
             </div>

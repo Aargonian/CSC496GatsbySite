@@ -47,7 +47,13 @@ exports.createPages = async ({ actions: { createPage } }) => {
   })
 
   // Create the individual pages
-  allPokemon.forEach((pokemon) => {
+  for (let i = 0; i < allPokemon.length; i++)
+  {
+    pokemon = allPokemon[i]
+    previousPokemon = i-1 < 0 ? null : allPokemon[i-1]
+    nextPokemon = i+1 == allPokemon.length ? null : allPokemon[i+1]
+    pokemon.previous = previousPokemon == null ? null : previousPokemon.name
+    pokemon.next = nextPokemon == null ? null : nextPokemon.name
     createPage(
       {
         path: `/pokemon/${pokemon.name}`,
@@ -55,5 +61,5 @@ exports.createPages = async ({ actions: { createPage } }) => {
         context: { pokemon },
       }
     )
-  })
+  }
 }

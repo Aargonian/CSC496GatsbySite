@@ -1,12 +1,22 @@
-.pokemon_container {
+.page_container {
     width: 80%;
     margin: auto;
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
+}
+
+.pokemon_container {
+    width: 100%;
+    margin: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
 }
 
 .pokemon_flex {
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -87,7 +97,7 @@
 }
 
 .pieChartContainer {
-    width: 80%;
+    width: 100%;
     padding: 1rem;
     margin: 2rem auto;
     padding: 0.5em 1em;
@@ -96,4 +106,46 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.misc_container {
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.header {
+    width: 100%;
+    margin: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+.prevNavLink {
+    flex: 1 0 auto;
+    text-align: left;
+}
+
+.nextNavLink {
+    flex: 1 0 auto;
+    text-align: right;
+}
+
+.returnNavLink {
+    flex: 1 0 auto;
+    text-align: center;
 }
